@@ -74,11 +74,27 @@ enum PlatformResolutionPreset {
   max,
 }
 
+enum PlatformCaptureDeviceType {
+   // see https://developer.apple.com/documentation/avfoundation/avcapturedevice/devicetype-swift.struct?language=objc
+   external,
+   builtInWideAngleCamera,
+   builtInTelephotoCamera,
+   builtInUltraWideCamera,
+   builtInDualCamera,
+   builtInDualWideCamera,
+   builtInTripleCamera,
+   unknown,
+ }
+
 // Pigeon version of CameraDescription.
 class PlatformCameraDescription {
   PlatformCameraDescription({
     required this.name,
     required this.lensDirection,
+    required this.deviceType,
+    required this.manufacturer,
+    required this.model,
+    required this.localisedName,
   });
 
   /// The name of the camera device.
@@ -86,6 +102,12 @@ class PlatformCameraDescription {
 
   /// The direction the camera is facing.
   final PlatformCameraLensDirection lensDirection;
+
+   final PlatformCaptureDeviceType deviceType;
+ 
+   final String manufacturer;
+   final String model;
+   final String localisedName;
 }
 
 // Pigeon version of the data needed for a CameraInitializedEvent.
